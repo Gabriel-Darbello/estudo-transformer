@@ -6,5 +6,6 @@ tokenizer = Tokenizer()
 
 user_msg = str(input("Digite algo: "))
 tokens = tokenizer.tokenize(user_msg)
-embedding.generate_embedding(tokens)
+embeddings = embedding.generate_embedding(tokens)
+print(embeddings)
 
