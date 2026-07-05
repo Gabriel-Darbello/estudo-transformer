@@ -1,4 +1,5 @@
 import numpy as np
+from math import sqrt
 
 class SelfAttention:
     def __init__(self):
@@ -20,6 +21,8 @@ class SelfAttention:
             [-0.66, 0.84, 0.29]
         ])
 
+        self.dk = 3
+
     def _get_query(self, embeddings):
         queries = embeddings @ self.wq
         return queries
@@ -32,4 +35,6 @@ class SelfAttention:
         values = embeddings @ self.wv
         return values
 
-
+    def _get_scores(self, queries, keys):
+        scores = (queries @ keys.T) / sqrt(self.dk)
+        return scores
