@@ -25,16 +25,31 @@ class SelfAttention:
 
     def _get_query(self, embeddings):
         queries = embeddings @ self.wq
-        return queries
+        return np.array(queries)
 
     def _get_key(self, embeddings):
         keys = embeddings @ self.wk
-        return keys
+        return np.array(keys)
 
     def _get_value(self, embeddings):
         values = embeddings @ self.wv
-        return values
+        return np.array(values)
 
     def _get_scores(self, queries, keys):
         scores = (queries @ keys.T) / sqrt(self.dk)
-        return scores
+        return np.array(scores)
+
+    def _softmax(self, scores):
+        attention = []
+        for row in scores:
+            exp_score = np.exp(row)
+            exp_sum = np.sum(exp_score)
+            exp_score = exp_score / exp_sum
+            attention.append(exp_score)
+        return np.array(attention)
+
+
+
+
+
+
