@@ -48,6 +48,31 @@ class SelfAttention:
             attention.append(exp_score)
         return np.array(attention)
 
+    def _aplly_attention(self, attention, values):
+        return attention @ values
+
+    def forward(self, embedding):
+        query = self._get_query(embedding)
+        print(f"Valor da query: \n {query}")
+
+        key = self._get_key(embedding)
+        print(f"Valor da key: \n {key}")
+
+        value = self._get_value(embedding)
+        print(f"Valor do value: \n {value}")
+
+        scores = self._get_scores(query, key)
+        print(f"Valor dos scores: \n {scores}")
+
+        attention = self._softmax(scores)
+        print(f"Valor da atenção: \n {attention}")
+
+        attention_value = self._aplly_attention(attention, value)
+        print(f"Valor final: \n {attention_value}")
+
+        return attention_value
+
+
 
 
 
